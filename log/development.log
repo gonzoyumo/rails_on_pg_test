@@ -1,0 +1,111 @@
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (5.4ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (2.7ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to InitialMigration (20100316131403)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (4.7ms)[0m   [0;1mCREATE TABLE "projects" ("id" serial primary key, "name" character varying(255), "user_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (2.8ms)[0m   [0mCREATE TABLE "tasks" ("id" serial primary key, "value" character varying(255), "project_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (4.9ms)[0m   [0;1mCREATE TABLE "users" ("id" serial primary key, "login" character varying(255), "email" character varying(255), "about" text, "is_active" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (2.5ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to InitialMigration (20100316131403)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (4.7ms)[0m   [0;1mCREATE TABLE "projects" ("id" serial primary key, "name" character varying(255), "user_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (3.5ms)[0m   [0mCREATE TABLE "tasks" ("id" serial primary key, "value" character varying(255), "project_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (5.1ms)[0m   [0;1mCREATE TABLE "users" ("id" serial primary key, "login" character varying(255), "email" character varying(255), "about" text, "is_active" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mDROP FUNCTION IF EXISTS format_name(first_name character varying(125),middle_name character varying(15),last_name character varying(20)) CASCADE[0m
+  [4;36;1mSQL (4.5ms)[0m   [0;1mCREATE LANGUAGE plpgsql[0m
+  [4;35;1mSQL (1.3ms)[0m   [0mCREATE FUNCTION format_name(first_name character varying(125),middle_name character varying(15),last_name character varying(20)) RETURNS character varying AS $$
+ 
+ BEGIN
+ RETURN COALESCE(last_name, 'no last name') || ', ' || COALESCE(first_name, 'no first name') || ' ' || COALESCE(middle_name || '.','');
+ END;
+ $$ LANGUAGE 'plpgsql';
+ [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mDROP FUNCTION IF EXISTS format_name2(first_name character varying(125),middle_name character varying(15),last_name character varying(20)) CASCADE[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: language "plpgsql" already exists
+: CREATE LANGUAGE plpgsql[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPGError: ERROR: current transaction is aborted, commands ignored until end of transaction block
+: CREATE FUNCTION format_name2(first_name character varying(125),middle_name character varying(15),last_name character varying(20)) RETURNS character varying AS $$
+ 
+ BEGIN
+ RETURN COALESCE(last_name, 'no last name') || ', ' || COALESCE(first_name, 'no first name') || ' ' || COALESCE(middle_name || '.','');
+ END;
+ $$ LANGUAGE 'plpgsql';
+ [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to InitialMigration (20100316131403)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (4.5ms)[0m   [0;1mCREATE TABLE "projects" ("id" serial primary key, "name" character varying(255), "user_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (3.3ms)[0m   [0mCREATE TABLE "tasks" ("id" serial primary key, "value" character varying(255), "project_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (4.3ms)[0m   [0;1mCREATE TABLE "users" ("id" serial primary key, "login" character varying(255), "email" character varying(255), "about" text, "is_active" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (0.7ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100316131403')[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to InitialMigration (20100316131403)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.3ms)[0m   [0mDELETE FROM schema_migrations WHERE version = '20100316131403'[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to InitialMigration (20100316131403)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (1.9ms)[0m   [0;1mDROP TABLE "projects"[0m
+  [4;35;1mSQL (14.2ms)[0m   [0mCREATE TABLE "projects" ("id" serial primary key, "name" character varying(255), "user_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mDROP TABLE "tasks"[0m
+  [4;35;1mSQL (4.6ms)[0m   [0mCREATE TABLE "tasks" ("id" serial primary key, "value" character varying(255), "project_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mDROP TABLE "users"[0m
+  [4;35;1mSQL (8.0ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "login" character varying(255), "email" character varying(255), "about" text, "is_active" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mDROP FUNCTION IF EXISTS format_name(first_name character varying(125),middle_name character varying(15),last_name character varying(20)) CASCADE[0m
+  [4;35;1mSQL (5.3ms)[0m   [0mCREATE LANGUAGE plpgsql[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mCREATE FUNCTION format_name(first_name character varying(125),middle_name character varying(15),last_name character varying(20)) RETURNS character varying AS $$
+ 
+ BEGIN
+ RETURN COALESCE(last_name, 'no last name') || ', ' || COALESCE(first_name, 'no first name') || ' ' || COALESCE(middle_name || '.','');
+ END;
+ $$ LANGUAGE 'plpgsql';
+ [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100316131403')[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to InitialMigration (20100316131403)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.3ms)[0m   [0mDELETE FROM schema_migrations WHERE version = '20100316131403'[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to InitialMigration (20100316131403)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (1.6ms)[0m   [0;1mDROP TABLE "projects"[0m
+  [4;35;1mSQL (5.5ms)[0m   [0mCREATE TABLE "projects" ("id" serial primary key, "name" character varying(255), "user_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mDROP TABLE "tasks"[0m
+  [4;35;1mSQL (3.1ms)[0m   [0mCREATE TABLE "tasks" ("id" serial primary key, "value" character varying(255), "project_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mDROP TABLE "users"[0m
+  [4;35;1mSQL (7.4ms)[0m   [0mCREATE TABLE "users" ("id" serial primary key, "login" character varying(255), "email" character varying(255), "about" text, "is_active" boolean, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP FUNCTION IF EXISTS format_name(first_name character varying(125),middle_name character varying(15),last_name character varying(20)) CASCADE[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: language "plpgsql" already exists
+: CREATE LANGUAGE plpgsql[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPGError: ERROR: current transaction is aborted, commands ignored until end of transaction block
+: CREATE FUNCTION format_name(first_name character varying(125),middle_name character varying(15),last_name character varying(20)) RETURNS character varying AS $$
+ 
+ BEGIN
+ RETURN COALESCE(last_name, 'no last name') || ', ' || COALESCE(first_name, 'no first name') || ' ' || COALESCE(middle_name || '.','');
+ END;
+ $$ LANGUAGE 'plpgsql';
+ [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
