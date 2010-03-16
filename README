@@ -22,3 +22,14 @@ SQL (0.0ms)   PGError: ERROR: current transaction is aborted, commands ignored u
  $$ LANGUAGE 'plpgsql';
  
   SQL (0.1ms)   ROLLBACK
+
+
+
+Note that using rake db:setup (which is 'db:create', 'db:schema:load', 'db:seed') doesn't break since ActiveRecord::StatementInvalid is catched in the rescue.
+To test it :
+1. rename config/test_schema.rb into schema.rb
+2. run rake db:setup
+
+no problems here !
+
+
